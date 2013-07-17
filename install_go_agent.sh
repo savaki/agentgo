@@ -31,14 +31,15 @@ if [ ! -d /usr/share/go-agent ] ; then
   rm -f ${GO_AGENT}
 
   # add GOPATH to the go-agent profile
-  cat > profile.$$ <<EOF
+  cp /etc/default/profile profile.$$
+  cat >> profile.$$ <<EOF
 
 # Support for Golang 
 export GOPATH=${HOME}/gocode
 export PATH=${PATH}:/usr/local/go/bin:${GOPATH}/bin
 EOF
-  sudo cat profile.$$ >> /etc/default/profile
-  /etc/init.d/go-agent stop
+
+  sudo cp profile.$$ /etc/default/profile
 fi  
 
 
