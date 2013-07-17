@@ -1,0 +1,3 @@
+.vagrant
+agent.json
+packer_cache
