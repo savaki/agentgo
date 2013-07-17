@@ -3,15 +3,19 @@
 set -u 
 set -e
 
-cat > agent.json <<EOF
+AMI="ami-70f96e40"
+REGION="us-west-2"
+INSTANCE_TYPE="m1.medium"
+
+cat > packer.json <<EOF
 {
   "builders":[{
     "type": "amazon-ebs",
     "access_key": "${AWS_ACCESS_KEY_ID}",
     "secret_key": "${AWS_SECRET_ACCESS_KEY}",
-    "region": "us-west-2",
-    "source_ami": "ami-70f96e40",
-    "instance_type": "m1.medium",
+    "region": "${REGION}",
+    "source_ami": "${AMI}",
+    "instance_type": "${INSTANCE_TYPE}",
     "ssh_username": "ubuntu",
     "ami_name": "go-agent {{.CreateTime}}"
   }],
