@@ -1,5 +1,5 @@
 .vagrant
 agent.json
 packer_cache
-sample.txt
+sample.*
 agentgo

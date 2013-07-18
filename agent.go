@@ -63,8 +63,8 @@ func getUserData(dataSource func() (io.ReadCloser, error)) (*UserData, error) {
 	return userData, err
 }
 
-func writeErrorMessage(err error, filename string) {
-	ioutil.WriteFile(filename, []byte(err.Error()), 0644)
+func writeErrorMessage(err error, filename string) error {
+	return ioutil.WriteFile(filename, []byte(err.Error()), 0644)
 }
 
 func writeGoAgentConfig(config *UserData, filename string) error {

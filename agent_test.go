@@ -3,9 +3,11 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
+	"os"
 	"strings"
 	"testing"
 	"time"
@@ -112,5 +114,30 @@ GO_SERVER=1234
 	}
 	if parts[0] != "GO_SERVER=1234" {
 		t.Fatalf("expected parts[0] to be GO_SERVER=1234; actual was %s\n", parts[0])
+	}
+}
+
+func TestWriteToFile(t *testing.T) {
+	// Given
+	filename := "sample.err"
+	if _, err := os.Stat(filename); err == nil {
+		fmt.Printf("deleting file, %s\n", filename)
+		os.Remove(filename)
+	}
+	expected := fmt.Sprintf("ugh!  something bad happened %d", time.Now().Unix())
+
+	// When
+	err := writeErrorMessage(errors.New(expected), filename)
+
+	// Then
+	if err != nil {
+		panic(err)
+	}
+	actual, err := ioutil.ReadFile(filename) // ensure the file exists
+	if err != nil {
+		panic(err)
+	}
+	if string(actual) != expected {
+		t.Fatalf("expected %s; actual was %s\n", expected, string(actual))
 	}
 }
