@@ -24,9 +24,10 @@ cat > packer.json <<EOF
     {
       "type": "shell",
       "scripts": [
-        "install_go.sh",
-        "install_go_agent.sh",
-        "install_mysql.sh"
+        "scripts/install_go.sh",
+        "scripts/install_go_agent.sh",
+        "scripts/install_mysql.sh",
+        "scripts/install_aws_sdk.sh"
       ]
     }
   ]

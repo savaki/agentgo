@@ -3,3 +3,4 @@ agent.json
 packer_cache
 sample.*
 agentgo
+packer.json

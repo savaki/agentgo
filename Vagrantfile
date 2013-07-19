@@ -4,9 +4,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.network :public_network
 
-  config.vm.provision :shell, :path => "install_go.sh"
-  config.vm.provision :shell, :path => "install_go_agent.sh"
-  config.vm.provision :shell, :path => "install_mysql.sh"
+  config.vm.provision :shell, :path => "scripts/install_go.sh"
+  config.vm.provision :shell, :path => "scripts/install_go_agent.sh"
+  config.vm.provision :shell, :path => "scripts/install_mysql.sh"
+  config.vm.provision :shell, :path => "scripts/install_aws_sdk.sh"
 
   config.vm.provider :virtualbox do |vb|
     # enable the gui.  the default behavior is to start up headless
